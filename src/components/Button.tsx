@@ -27,8 +27,10 @@ export function Button({
   )
 
   return typeof props.href === 'undefined' ? (
+    // @ts-ignore
     <button className={className} {...props} />
   ) : (
+      // @ts-ignore
     <Link className={className} {...props} />
   )
 }

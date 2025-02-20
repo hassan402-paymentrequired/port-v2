@@ -1,42 +1,70 @@
-# Spotlight
+import assert from 'assert'
+import * as cheerio from 'cheerio'
+import { Feed } from 'feed'
 
-Spotlight is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+export async function GET(req: Request) {
+  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
 
-## Getting started
+  if (!siteUrl) {
+    throw Error('Missing NEXT_PUBLIC_SITE_URL environment variable')
+  }
 
-To get started with this template, first install the npm dependencies:
+  let author = {
+    name: 'Spencer Sharp',
+    email: 'spencer@planetaria.tech',
+  }
 
-```bash
-npm install
-```
+  let feed = new Feed({
+    title: author.name,
+    description: 'Your blog description',
+    author,
+    id: siteUrl,
+    link: siteUrl,
+    image: `${siteUrl}/favicon.ico`,
+    favicon: `${siteUrl}/favicon.ico`,
+    copyright: `All rights reserved ${new Date().getFullYear()}`,
+    feedLinks: {
+      rss2: `${siteUrl}/feed.xml`,
+    },
+  })
 
-Next, create a `.env.local` file in the root of your project and set the `NEXT_PUBLIC_SITE_URL` variable to your site's public URL:
+  let articleIds = require
+    .context('../articles', true, /\/page\.mdx$/)
+    .keys()
+    .filter((key) => key.startsWith('./'))
+    .map((key) => key.slice(2).replace(/\/page\.mdx$/, ''))
 
-```
-NEXT_PUBLIC_SITE_URL=https://example.com
-```
+  for (let id of articleIds) {
+    let url = String(new URL(`/articles/${id}`, req.url))
+    let html = await (await fetch(url)).text()
+    let $ = cheerio.load(html)
 
-Next, run the development server:
+    let publicUrl = `${siteUrl}/articles/${id}`
+    let article = $('article').first()
+    let title = article.find('h1').first().text()
+    let date = article.find('time').first().attr('datetime')
+    let content = article.find('[data-mdx-content]').first().html()
 
-```bash
-npm run dev
-```
+    assert(typeof title === 'string')
+    assert(typeof date === 'string')
+    assert(typeof content === 'string')
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+    feed.addItem({
+      title,
+      id: publicUrl,
+      link: publicUrl,
+      content,
+      author: [author],
+      contributor: [author],
+      date: new Date(date),
+    })
+  }
 
-## Customizing
-
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
-
-## License
-
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [MDX](https://mdxjs.com) - the MDX documentation
+  return new Response(feed.rss2(), {
+    status: 200,
+    headers: {
+      'content-type': 'application/xml',
+      'cache-control': 's-maxage=31556952',
+    },
+  })
+}

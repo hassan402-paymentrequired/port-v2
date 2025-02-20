@@ -59,7 +59,7 @@ export default function About() {
       <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
         <div className="lg:pl-20">
           <div className="max-w-xs px-2.5 lg:max-w-none">
-             <iframe style={{borderRadius: '12px'}} src="https://open.spotify.com/embed/playlist/37i9dQZF1EIUybCWNtBbsK?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+             <iframe style={{borderRadius: '12px'}} src="https://open.spotify.com/embed/playlist/37i9dQZF1EIUybCWNtBbsK?utm_source=generator" width="100%" height="352" frameBorder="0"  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">

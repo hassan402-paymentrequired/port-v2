@@ -63,7 +63,7 @@ export default function Uses() {
         </ToolsSection>
         <ToolsSection title="Design">
           <Tool title="Figma">
-            I don't actually have the one i use though but i will recommend mobbin, dribble and the likes sha
+            I don&ldquo;t actually have the one i use though but i will recommend mobbin, dribble and the likes sha
           </Tool>
           <Tool title="Tailwind and Shadcn">
             Great Ui labrary I don’t know how anyone designs UIs without it (some are haters). It’s like having a

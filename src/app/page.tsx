@@ -27,7 +27,7 @@ export default async function Home() {
             Hey there! I’m Hassan, a software developer 🤓 based in Lagos,
             Nigeria. I’m the proud founder of{' '}
             <span className="font-bold">Laramic Studio</span>. Quick note:
-            Laramic Studio is currently in the "cooking up something great"
+            Laramic Studio is currently in the &ldquo;cooking up something great&rdquo;
             phase. 🔥 It’s where I turn wild ideas into web solutions—like
             turning coffee into code, but less messy!
           </p>

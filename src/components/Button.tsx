@@ -30,7 +30,7 @@ export function Button({
     // @ts-ignore
     <button className={className} {...props} />
   ) : (
-      // @ts-ignore
+      // @ts-ignore 
     <Link className={className} {...props} />
   )
 }

@@ -11,19 +11,20 @@ import logoPlanetaria from '@/images/logos/planetaria.svg'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'Nexcent',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
+      'Responsive Landing Page Design | Website Home Page Design | Agency Website UI Design (Community).',
+    link: { href: 'https://laramic-next-gen.netlify.app/', label: 'laramic-next-gen' },
+    figma: 'https://www.figma.com/design/4Mf2ARGIcyxnlWcJhdHc4G/Responsive-Landing-Page-Design-%7C-Website-Home-Page-Design-%7C-Agency-Website-UI-Design-(Community)?node-id=5-573&t=MuHXI94avXyauUHA-0',
     logo: logoPlanetaria,
   },
-    {
-    name: 'cosmOS',
-    description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
-  },
+  //   {
+  //   name: 'cosmOS',
+  //   description:
+  //     'The operating system that powers our Planetaria space shuttles.',
+  //   link: { href: '#', label: 'github.com' },
+  //   logo: logoCosmos,
+  // },
 ]
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
